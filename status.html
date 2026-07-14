@@ -16,12 +16,11 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-start;
       background: #0b0b0b;
       padding: 2rem 1rem;
     }
 
-    /* animated background (reuse) */
     .animated-bg {
       position: fixed;
       top: 0;
@@ -101,7 +100,6 @@
       letter-spacing: 2px;
     }
 
-    /* ---- table style (boxed) ---- */
     .status-grid {
       display: flex;
       flex-direction: column;
@@ -135,11 +133,58 @@
       margin-left: auto;
     }
 
-    /* two column layout for executors */
+    /* Script list - simple */
+    .script-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .script-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 0.95rem;
+      color: #d4d4d4;
+      flex-wrap: wrap;
+    }
+    .script-name {
+      font-weight: 500;
+      margin-right: 12px;
+    }
+    .script-status {
+      font-weight: 500;
+      padding: 0.1rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      background: rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
+
+    /* Status colors */
+    .status-working-op { color: #66d9a0; }
+    .status-experimental { color: #d4b86a; }
+    .status-soon { color: #b57edc; }
+    .status-notworking { color: #f28b82; }
+    .status-working { color: #6fcf97; }
+    .status-updating { color: #f5b342; }
+    .status-discontinued { color: #5b9bd5; }
+
+    .badge-op {
+      background: rgba(102, 217, 160, 0.15);
+      padding: 0.05rem 0.5rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      margin-left: 4px;
+      color: #66d9a0;
+    }
+
+    /* Executor grid */
     .executor-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 0.4rem 0.8rem;
+      gap: 0.2rem 0.8rem;
     }
 
     .executor-item {
@@ -170,56 +215,23 @@
       border-radius: 12px;
     }
 
-    .exe-green { color: #66d9a0; }      /* 🟢 */
-    .exe-red { color: #f28b82; }        /* 🔴 */
-    .exe-blue { color: #7aa9ff; }       /* 🔵 */
+    .exe-green { color: #66d9a0; }
+    .exe-red { color: #f28b82; }
+    .exe-blue { color: #7aa9ff; }
 
-    /* script list */
-    .script-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
+    .executor-group {
+      margin-bottom: 1.6rem;
     }
-    .script-row {
+    .executor-group-title {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0.4rem 0.2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      font-size: 0.95rem;
-      color: #d4d4d4;
-      flex-wrap: wrap;
-    }
-    .script-name {
+      gap: 8px;
+      margin-bottom: 0.4rem;
+      color: #c0c0c0;
       font-weight: 500;
-      margin-right: 12px;
-    }
-    .script-status {
-      font-weight: 500;
-      padding: 0.1rem 0.9rem;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      background: rgba(0,0,0,0.2);
-      white-space: nowrap;
-    }
-
-    /* ---- color classes for status (scripts) ---- */
-    .status-working-op { color: #66d9a0; }           /* green aqua */
-    .status-experimental { color: #d4b86a; }         /* dark yellow */
-    .status-soon { color: #b57edc; }                 /* purple */
-    .status-notworking { color: #f28b82; }           /* red */
-    .status-working { color: #6fcf97; }              /* green */
-    .status-updating { color: #f5b342; }             /* yellow */
-    .status-discontinued { color: #5b9bd5; }         /* blue */
-
-    /* small badge for OP */
-    .badge-op {
-      background: rgba(102, 217, 160, 0.15);
-      padding: 0.05rem 0.5rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      margin-left: 4px;
-      color: #66d9a0;
+      font-size: 1.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding-bottom: 4px;
     }
 
     @media (max-width: 600px) {
@@ -238,7 +250,6 @@
 
   <div class="portal">
 
-    <!-- back to main (part 1) -->
     <a href="index.html" class="back-link">⬅ Back to Hub</a>
 
     <h1>
@@ -254,8 +265,40 @@
           📜 Scripts
           <span>status · 31 entries</span>
         </div>
-        <div class="script-list" id="scriptList">
-          <!-- injected by JS -->
+        <div class="script-list">
+
+          <!-- All scripts hardcoded for reliability -->
+          <div class="script-row"><span class="script-name">99 Nights In The Forest</span><span class="script-status status-working-op">Working | OP ⭐</span></div>
+          <div class="script-row"><span class="script-name">Ability Wars</span><span class="script-status status-working-op">Working | OP ⭐</span></div>
+          <div class="script-row"><span class="script-name">Blade Ball</span><span class="script-status status-discontinued">Discontinued</span></div>
+          <div class="script-row"><span class="script-name">Clone Kingdom Tycoon</span><span class="script-status status-experimental">Working (EXPERIMENTAL)</span></div>
+          <div class="script-row"><span class="script-name">Die Of Death</span><span class="script-status status-experimental">Working (EXPERIMENTAL)</span></div>
+          <div class="script-row"><span class="script-name">Doors</span><span class="script-status status-working-op">Working | OP ⭐</span></div>
+          <div class="script-row"><span class="script-name">Evade</span><span class="script-status status-experimental">Working (EXPERIMENTAL)</span></div>
+          <div class="script-row"><span class="script-name">Forsaken</span><span class="script-status status-experimental">Working (EXPERIMENTAL)</span></div>
+          <div class="script-row"><span class="script-name">Funky Friday</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Hades RNG</span><span class="script-status status-discontinued">Discontinued</span></div>
+          <div class="script-row"><span class="script-name">Jailbreak</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Murder Mystery 2</span><span class="script-status status-discontinued">Discontinued</span></div>
+          <div class="script-row"><span class="script-name">Natural Disaster Survival</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Plants VS Brainrots</span><span class="script-status status-notworking">Not Working</span></div>
+          <div class="script-row"><span class="script-name">Secret Universe</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Shoot And Eat Noobs</span><span class="script-status status-discontinued">Discontinued</span></div>
+          <div class="script-row"><span class="script-name">Sky Fighters</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Slap Battles</span><span class="script-status status-working-op">Working | OP ⭐</span></div>
+          <div class="script-row"><span class="script-name">Slap Battles MODDED</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Sols RNG</span><span class="script-status status-discontinued">Discontinued</span></div>
+          <div class="script-row"><span class="script-name">Something Evil Will Happen</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Steal A Brainrot</span><span class="script-status status-discontinued">Discontinued</span></div>
+          <div class="script-row"><span class="script-name">Survive Lava For Brainrots</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Survive On A Raft</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Tenna 3D Blast: Spamton's Island</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Tower Defense Simulator X</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Trollge Universal Incident</span><span class="script-status status-experimental">Working (EXPERIMENTAL)</span></div>
+          <div class="script-row"><span class="script-name">Trollge Universe:Aftermath</span><span class="script-status status-soon">Soon</span></div>
+          <div class="script-row"><span class="script-name">Universal Script Hub</span><span class="script-status status-working">Working</span></div>
+          <div class="script-row"><span class="script-name">Violence District</span><span class="script-status status-experimental">Working (EXPERIMENTAL)</span></div>
+
         </div>
       </div>
 
@@ -265,231 +308,109 @@
           ⚙️ Executors
           <span>all platforms</span>
         </div>
-        <div id="executorContainer">
-          <!-- injected by JS -->
-        </div>
-      </div>
 
+        <!-- Windows -->
+        <div class="executor-group">
+          <div class="executor-group-title">🖥️ Windows Executors</div>
+          <div class="executor-grid">
+            <div class="executor-item"><span class="exe-name">Zenith</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Wave</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Volt</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Volcano</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Synapse Z</span><span><span class="exe-type">Paid (Beta)</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Velocity</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Seliware</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Swift</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Valex</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Potassium</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Solara</span><span><span class="exe-type">Free</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Xeno</span><span><span class="exe-type">Free</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Bunni.fun</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Sirhurt</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Lovreware</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Drift</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">JJSploit</span><span><span class="exe-type">Free</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">LX63</span><span><span class="exe-type">Free</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Pluto</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">ChocoSploit</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Ronix</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Cryptic</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Cosmic</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Isaeva</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Madium</span><span><span class="exe-type">Free</span><span class="exe-status exe-green">🟢</span></span></div>
+          </div>
+        </div>
+
+        <!-- Mac -->
+        <div class="executor-group">
+          <div class="executor-group-title">🍏 Mac Executors</div>
+          <div class="executor-grid">
+            <div class="executor-item"><span class="exe-name">Hydrogen</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Macsploit</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Cryptic</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Ronix</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Opiumware</span><span><span class="exe-type">Free</span><span class="exe-status exe-red">🔴</span></span></div>
+          </div>
+        </div>
+
+        <!-- Android -->
+        <div class="executor-group">
+          <div class="executor-group-title">🤖 Android Executors</div>
+          <div class="executor-grid">
+            <div class="executor-item"><span class="exe-name">Delta</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Codex</span><span><span class="exe-type">Free</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Cryptic</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Fluxus Z</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Ronix</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Subzero</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Vega X</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Punk X</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+          </div>
+        </div>
+
+        <!-- iOS -->
+        <div class="executor-group">
+          <div class="executor-group-title">📱 iOS Executors</div>
+          <div class="executor-grid">
+            <div class="executor-item"><span class="exe-name">Delta</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Ronix</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-red">🔴</span></span></div>
+          </div>
+        </div>
+
+        <!-- Windows External -->
+        <div class="executor-group">
+          <div class="executor-group-title">🔄 Windows External Executors</div>
+          <div class="executor-grid">
+            <div class="executor-item"><span class="exe-name">Ronin</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Serotonin</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Melatonin</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Severe</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Matcha</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Isabelle</span><span><span class="exe-type">Paid</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Matrix Hub</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Photon</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Valex External</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">DX9WARE V2</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">Yerba</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+            <div class="executor-item"><span class="exe-name">RbxCli</span><span><span class="exe-type">Paid</span><span class="exe-status exe-green">🟢</span></span></div>
+          </div>
+        </div>
+
+        <!-- Other -->
+        <div class="executor-group">
+          <div class="executor-group-title">⚡ Other Executors</div>
+          <div class="executor-grid">
+            <div class="executor-item"><span class="exe-name">VeilX</span><span><span class="exe-type">Free</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">NullX</span><span><span class="exe-type">Free [SOON]</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Krnl</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-blue">🔵</span></span></div>
+            <div class="executor-item"><span class="exe-name">Swift</span><span><span class="exe-type">Free + Key [DOWN]</span><span class="exe-status exe-red">🔴</span></span></div>
+            <div class="executor-item"><span class="exe-name">Nihon</span><span><span class="exe-type">Free + Key</span><span class="exe-status exe-blue">🔵</span></span></div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-
-  <script>
-    (function() {
-      "use strict";
-
-      // ---------- SCRIPTS DATA (exactly as provided) ----------
-      const scriptsData = [
-        { name: "99 Nights In The Forest", status: "Working | OP ⭐" },
-        { name: "Ability Wars", status: "Working | OP ⭐" },
-        { name: "Blade Ball", status: "Discontinued" },
-        { name: "Clone Kingdom Tycoon", status: "Working (EXPERIMENTAL)" },
-        { name: "Die Of Death", status: "Working (EXPERIMENTAL)" },
-        { name: "Doors", status: "Working | OP ⭐" },
-        { name: "Evade", status: "Working (EXPERIMENTAL)" },
-        { name: "Forsaken", status: "Working (EXPERIMENTAL)" },
-        { name: "Funky Friday", status: "Soon" },
-        { name: "Hades RNG", status: "Discontinued" },
-        { name: "Jailbreak", status: "Soon" },
-        { name: "Murder Mystery 2", status: "Discontinued" },
-        { name: "Natural Disaster Survival", status: "Soon" },
-        { name: "Plants VS Brainrots", status: "Not Working" },
-        { name: "Secret Universe", status: "Soon" },
-        { name: "Shoot And Eat Noobs", status: "Discontinued" },
-        { name: "Sky Fighters", status: "Soon" },
-        { name: "Slap Battles", status: "Working | OP ⭐" },
-        { name: "Slap Battles MODDED", status: "Soon" },
-        { name: "Sols RNG", status: "Discontinued" },
-        { name: "Something Evil Will Happen", status: "Soon" },
-        { name: "Steal A Brainrot", status: "Discontinued" },
-        { name: "Survive Lava For Brainrots", status: "Soon" },
-        { name: "Survive On A Raft", status: "Soon" },
-        { name: "Tenna 3D Blast: Spamton's Island", status: "Soon" },
-        { name: "Tower Defense Simulator X", status: "Soon" },
-        { name: "Trollge Universal Incident", status: "Working (EXPERIMENTAL)" },
-        { name: "Trollge Universe:Aftermath", status: "Soon" },
-        { name: "Universal Script Hub", status: "Working" },
-        { name: "Violence District", status: "Working (EXPERIMENTAL)" }
-      ];
-
-      // ---------- HELPER: status -> color class + display ----------
-      function getStatusClass(status) {
-        const s = status.toLowerCase();
-        if (s.includes('op') || s.includes('⭐')) return 'status-working-op';
-        if (s.includes('experimental')) return 'status-experimental';
-        if (s.includes('soon')) return 'status-soon';
-        if (s.includes('not working')) return 'status-notworking';
-        if (s.includes('working')) return 'status-working';
-        if (s.includes('updating')) return 'status-updating';
-        if (s.includes('discontinued')) return 'status-discontinued';
-        return ''; // fallback
-      }
-
-      // render scripts
-      function renderScripts() {
-        const container = document.getElementById('scriptList');
-        let html = '';
-        scriptsData.forEach(item => {
-          const statusClass = getStatusClass(item.status);
-          let displayStatus = item.status;
-          // if it has OP badge, keep it but we'll also show badge
-          const hasOp = item.status.includes('OP ⭐');
-          let cleanStatus = item.status.replace(' | OP ⭐', '').trim();
-          if (hasOp) {
-            displayStatus = cleanStatus + ' <span class="badge-op">⭐ OP</span>';
-          } else {
-            displayStatus = item.status;
-          }
-          html += `
-            <div class="script-row">
-              <span class="script-name">${item.name}</span>
-              <span class="script-status ${statusClass}">${displayStatus}</span>
-            </div>
-          `;
-        });
-        container.innerHTML = html;
-      }
-
-      // ---------- EXECUTORS DATA (grouped) ----------
-      const execGroups = [
-        {
-          label: 'Windows Executors',
-          icon: '🖥️',
-          items: [
-            { name: 'Zenith', type: 'Paid', status: '🔴' },
-            { name: 'Wave', type: 'Paid', status: '🔴' },
-            { name: 'Volt', type: 'Paid', status: '🟢' },
-            { name: 'Volcano', type: 'Paid', status: '🔴' },
-            { name: 'Synapse Z', type: 'Paid (Closed Beta)', status: '🔴' },
-            { name: 'Velocity', type: 'Free + Key', status: '🔴' },
-            { name: 'Seliware', type: 'Paid', status: '🟢' },
-            { name: 'Swift', type: 'Free + Key', status: '🔴' },
-            { name: 'Valex', type: 'Free + Key', status: '🟢' },
-            { name: 'Potassium', type: 'Paid', status: '🟢' },
-            { name: 'Solara', type: 'Free', status: '🟢' },
-            { name: 'Xeno', type: 'Free', status: '🟢' },
-            { name: 'Bunni.fun', type: 'Free + Key', status: '🔴' },
-            { name: 'Sirhurt', type: 'Paid', status: '🟢' },
-            { name: 'Lovreware', type: 'Paid', status: '🔴' },
-            { name: 'Drift', type: 'Free + Key', status: '🟢' },
-            { name: 'JJSploit', type: 'Free', status: '🟢' },
-            { name: 'LX63', type: 'Free', status: '🔴' },
-            { name: 'Pluto', type: 'Free + Key', status: '🟢' },
-            { name: 'ChocoSploit', type: 'Paid', status: '🟢' },
-            { name: 'Ronix', type: 'Free + Key', status: '🔴' },
-            { name: 'Cryptic', type: 'Paid', status: '🟢' },
-            { name: 'Cosmic', type: 'Paid', status: '🔴' },
-            { name: 'Isaeva', type: 'Paid', status: '🔴' },
-            { name: 'Madium', type: 'Free', status: '🟢' }
-          ]
-        },
-        {
-          label: 'Mac Executors',
-          icon: '🍏',
-          items: [
-            { name: 'Hydrogen', type: 'Free + Key', status: '🔴' },
-            { name: 'Macsploit', type: 'Paid', status: '🔴' },
-            { name: 'Cryptic', type: 'Free + Key', status: '🔴' },
-            { name: 'Ronix', type: 'Free + Key', status: '🔴' },
-            { name: 'Opiumware', type: 'Free', status: '🔴' }
-          ]
-        },
-        {
-          label: 'Android Executors',
-          icon: '🤖',
-          items: [
-            { name: 'Delta', type: 'Free + Key', status: '🔴' },
-            { name: 'Codex', type: 'Free', status: '🔴' },
-            { name: 'Cryptic', type: 'Free + Key', status: '🔴' },
-            { name: 'Fluxus Z', type: 'Free + Key', status: '🟢' },
-            { name: 'Ronix', type: 'Free + Key', status: '🔴' },
-            { name: 'Subzero', type: 'Free + Key', status: '🟢' },
-            { name: 'Vega X', type: 'Free + Key', status: '🟢' },
-            { name: 'Punk X', type: 'Free + Key', status: '🟢' }
-          ]
-        },
-        {
-          label: 'iOS Executors',
-          icon: '📱',
-          items: [
-            { name: 'Delta', type: 'Free + Key', status: '🔴' },
-            { name: 'Ronix', type: 'Free + Key', status: '🔴' }
-          ]
-        },
-        {
-          label: 'Windows External Executors',
-          icon: '🔄',
-          items: [
-            { name: 'Ronin', type: 'Paid', status: '🔴' },
-            { name: 'Serotonin', type: 'Paid', status: '🟢' },
-            { name: 'Melatonin', type: 'Paid', status: '🔴' },
-            { name: 'Severe', type: 'Paid', status: '🔴' },
-            { name: 'Matcha', type: 'Paid', status: '🟢' },
-            { name: 'Isabelle', type: 'Paid', status: '🔴' },
-            { name: 'Matrix Hub', type: 'Paid', status: '🟢' },
-            { name: 'Photon', type: 'Paid', status: '🟢' },
-            { name: 'Valex External', type: 'Free + Key', status: '🟢' },
-            { name: 'DX9WARE V2', type: 'Paid', status: '🟢' },
-            { name: 'Yerba', type: 'Paid', status: '🟢' },
-            { name: 'RbxCli', type: 'Paid', status: '🟢' }
-          ]
-        },
-        {
-          label: 'Other Executors',
-          icon: '⚡',
-          items: [
-            { name: 'VeilX', type: 'Free', status: '🔴' },
-            { name: 'NullX', type: 'Free [SOON]', status: '🔴' },
-            { name: 'Krnl', type: 'Free + Key', status: '🔵' },
-            { name: 'Swift', type: 'Free + Key [FULLY DOWN]', status: '🔴' },
-            { name: 'Nihon', type: 'Free + Key', status: '🔵' }
-          ]
-        }
-      ];
-
-      function renderExecutors() {
-        const container = document.getElementById('executorContainer');
-        let html = '';
-        execGroups.forEach(group => {
-          html += `<div style="margin-bottom: 1.6rem;">`;
-          html += `<div style="display:flex; align-items:center; gap:8px; margin-bottom:0.4rem; color:#c0c0c0; font-weight:500; font-size:1.1rem; border-bottom:1px solid rgba(255,255,255,0.04); padding-bottom:4px;">
-            <span>${group.icon}</span> ${group.label}
-          </div>`;
-          html += `<div class="executor-grid">`;
-          group.items.forEach(exe => {
-            let statusClass = '';
-            if (exe.status === '🟢') statusClass = 'exe-green';
-            else if (exe.status === '🔴') statusClass = 'exe-red';
-            else if (exe.status === '🔵') statusClass = 'exe-blue';
-            html += `
-              <div class="executor-item">
-                <span class="exe-name">${exe.name}</span>
-                <span>
-                  <span class="exe-type">${exe.type}</span>
-                  <span class="exe-status ${statusClass}">${exe.status}</span>
-                </span>
-              </div>
-            `;
-          });
-          html += `</div></div>`;
-        });
-        container.innerHTML = html;
-      }
-
-      // ---------- BACK BUTTON (to part 1) ----------
-      document.getElementById('backLink').addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('🔙 Return to main hub (part 1). In a full site, this would navigate back.');
-        // optional: you could redirect to part1.html if you have it.
-        // window.location.href = 'index.html';
-      });
-
-      // ---------- INIT ----------
-      renderScripts();
-      renderExecutors();
-
-      console.log('✅ Step 2: Scripts & Executors status loaded.');
-    })();
-  </script>
 
 </body>
 </html>
