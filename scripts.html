@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✧ ScripterHub · Scripts ✧</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #0b0b0b;
+      padding: 2rem 1rem;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: linear-gradient(145deg, #1a1a1a, #2b2b2b);
+      background-size: 400% 400%;
+      animation: colorPulse 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes colorPulse {
+      0% { background: #0a0a0a; }
+      30% { background: #2e2e2e; }
+      60% { background: #b0b0b0; }
+      85% { background: #4a4a4a; }
+      100% { background: #0a0a0a; }
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .portal {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      background: rgba(10, 10, 10, 0.35);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 3rem;
+      padding: 2rem 1.5rem 2.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.2rem;
+      color: #aaa;
+      text-decoration: none;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 4px;
+      transition: 0.2s;
+    }
+    .back-link:hover {
+      color: #f0f0f0;
+      border-bottom-color: rgba(255,255,255,0.3);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: #f0f0f0;
+      text-shadow: 0 0 12px rgba(255,255,255,0.15);
+      margin-bottom: 0.5rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    h1 small {
+      font-size: 1rem;
+      font-weight: 300;
+      color: #aaa;
+      display: block;
+      margin-top: 6px;
+      letter-spacing: 2px;
+    }
+
+    /* Search Bar */
+    .search-container {
+      max-width: 500px;
+      margin: 1.5rem auto 2rem;
+    }
+    .search-bar {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.5);
+      color: #e0e0e0;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .search-bar:focus {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.7);
+      box-shadow: 0 0 20px rgba(255,255,255,0.03);
+    }
+    .search-bar::placeholder {
+      color: #666;
+    }
+
+    /* Script Grid */
+    .scripts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .script-card {
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(4px);
+      border-radius: 1.8rem;
+      padding: 1.5rem 1.2rem 1.2rem;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .script-card:hover {
+      transform: translateY(-4px);
+      background: rgba(30, 30, 30, 0.7);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .script-card.hidden {
+      display: none;
+    }
+
+    /* Image placeholder */
+    .script-image {
+      width: 100%;
+      height: 160px;
+      border-radius: 1.2rem;
+      background: rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .script-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .script-image .placeholder-text {
+      color: #555;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .script-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e8e8e8;
+      margin-bottom: 0.2rem;
+    }
+    .script-gameid {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 0.8rem;
+      font-weight: 300;
+    }
+
+    /* Button row */
+    .button-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-width: 50px;
+      padding: 0.5rem 0.8rem;
+      border-radius: 40px;
+      border: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: rgba(255,255,255,0.05);
+      color: #bbb;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .action-btn:hover {
+      transform: scale(1.04);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .action-btn:active {
+      transform: scale(0.95);
+    }
+
+    .btn-game { background: rgba(0, 150, 255, 0.15); color: #6bb8ff; border-color: rgba(0,150,255,0.1); }
+    .btn-game:hover { background: rgba(0, 150, 255, 0.25); }
+
+    .btn-script { background: rgba(0, 255, 150, 0.1); color: #66d9a0; border-color: rgba(0,255,150,0.08); }
+    .btn-script:hover { background: rgba(0, 255, 150, 0.2); }
+
+    .btn-youtube { background: rgba(255, 50, 50, 0.1); color: #ff6b6b; border-color: rgba(255,50,50,0.08); }
+    .btn-youtube:hover { background: rgba(255, 50, 50, 0.2); }
+
+    .btn-discord { background: rgba(88, 101, 242, 0.15); color: #7a8cff; border-color: rgba(88,101,242,0.1); }
+    .btn-discord:hover { background: rgba(88, 101, 242, 0.25); }
+
+    /* Toast notification for copy */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: rgba(0,0,0,0.9);
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      color: #e0e0e0;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      pointer-events: none;
+      z-index: 999;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .no-results {
+      color: #666;
+      text-align: center;
+      font-size: 1.1rem;
+      padding: 3rem 0;
+      display: none;
+    }
+    .no-results.visible {
+      display: block;
+    }
+
+    .status-badge {
+      font-size: 0.65rem;
+      padding: 0.1rem 0.8rem;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.04);
+      color: #888;
+      margin-bottom: 0.4rem;
+      display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      .portal { padding: 1.2rem 0.8rem; }
+      h1 { font-size: 1.6rem; }
+      .scripts-grid { grid-template-columns: 1fr; }
+      .button-row { flex-wrap: wrap; }
+      .action-btn { flex: 1 1 40%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="animated-bg"></div>
+  <div class="bg-overlay"></div>
+
+  <div class="portal">
+
+    <a href="index.html" class="back-link">⬅ Back to Hub</a>
+
+    <h1>
+      📜 Scripts Library
+      <small>find your game · copy & play</small>
+    </h1>
+
+    <div class="search-container">
+      <input type="text" class="search-bar" id="searchBar" placeholder="🔍 Search by game name or ID...">
+    </div>
+
+    <div class="scripts-grid" id="scriptsGrid">
+      <!-- Cards will be injected by JS -->
+    </div>
+
+    <div class="no-results" id="noResults">❌ No scripts found matching your search.</div>
+
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">✅ Script copied to clipboard!</div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      // ============ SCRIPT DATA ============
+      // Add your scripts here following this format:
+      const scriptsData = [
+        {
+          name: "Slap Battles",
+          gameId: "6403373529",
+          image: "SlapBattles.png",  // you'll upload this image
+          gameUrl: "https://www.roblox.com/games/6403373529/Slap-Battles",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/refs/heads/main/Slap%20Battles/SB%20Hub%20OP%20Script%20(GUI%20CHOOSER)"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Working | OP ⭐"
+        },
+        {
+          name: "Blade Ball",
+          gameId: "13772394625",
+          image: "BladeBall.png",
+          gameUrl: "https://www.roblox.com/games/13772394625/Blade-Ball",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Blade%20Ball/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Discontinued"
+        },
+        {
+          name: "Doors",
+          gameId: "6516141723",
+          image: "Doors.png",
+          gameUrl: "https://www.roblox.com/games/6516141723/DOORS",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Doors/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Working | OP ⭐"
+        },
+        {
+          name: "Ability Wars",
+          gameId: "5591681512",
+          image: "AbilityWars.png",
+          gameUrl: "https://www.roblox.com/games/5591681512/Ability-Wars",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Ability%20Wars/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Working | OP ⭐"
+        },
+        {
+          name: "Jailbreak",
+          gameId: "606849621",
+          image: "Jailbreak.png",
+          gameUrl: "https://www.roblox.com/games/606849621/Jailbreak",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Jailbreak/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Soon"
+        },
+        {
+          name: "Murder Mystery 2",
+          gameId: "142823291",
+          image: "MM2.png",
+          gameUrl: "https://www.roblox.com/games/142823291/Murder-Mystery-2",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/MM2/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Discontinued"
+        },
+        {
+          name: "Tower Defense Simulator X",
+          gameId: "4829014002",
+          image: "TDSX.png",
+          gameUrl: "https://www.roblox.com/games/4829014002/Tower-Defense-Simulator-X",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/TDSX/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Soon"
+        },
+        {
+          name: "Evade",
+          gameId: "7825533204",
+          image: "Evade.png",
+          gameUrl: "https://www.roblox.com/games/7825533204/EVADE",
+          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Evade/script.lua"))()`,
+          youtube: "https://youtube.com/@yourchannel",
+          discord: "https://discord.gg/yourinvite",
+          status: "Working (EXPERIMENTAL)"
+        }
+      ];
+
+      // ============ RENDER ============
+      const grid = document.getElementById('scriptsGrid');
+      const searchBar = document.getElementById('searchBar');
+      const noResults = document.getElementById('noResults');
+      const toast = document.getElementById('toast');
+      let toastTimeout;
+
+      function renderScripts(filter = '') {
+        const query = filter.toLowerCase().trim();
+        let visibleCount = 0;
+        let html = '';
+
+        scriptsData.forEach((script, index) => {
+          const match = script.name.toLowerCase().includes(query) || 
+                        script.gameId.includes(query);
+          
+          if (!match && query !== '') {
+            // hidden - we'll add hidden class
+            html += `<div class="script-card hidden" data-index="${index}">`;
+          } else {
+            visibleCount++;
+            html += `<div class="script-card" data-index="${index}">`;
+          }
+
+          html += `
+            <div class="script-image">
+              <img src="${script.image}" alt="${script.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'placeholder-text\\'>📷 ${script.name}</span>'">
+            </div>
+            <div class="script-name">${script.name}</div>
+            <div class="script-gameid">ID: ${script.gameId}</div>
+            <span class="status-badge">${script.status}</span>
+            <div class="button-row">
+              <a href="${script.gameUrl}" target="_blank" class="action-btn btn-game">🎮 Game</a>
+              <button class="action-btn btn-script" data-script="${script.script.replace(/"/g, '&quot;')}">📋 Script</button>
+              <a href="${script.youtube}" target="_blank" class="action-btn btn-youtube">▶️ YouTube</a>
+              <a href="${script.discord}" target="_blank" class="action-btn btn-discord">💬 Discord</a>
+            </div>
+          </div>`;
+        });
+
+        grid.innerHTML = html;
+
+        // Show/hide no results
+        if (visibleCount === 0 && query !== '') {
+          noResults.classList.add('visible');
+        } else {
+          noResults.classList.remove('visible');
+        }
+
+        // Attach copy events to script buttons
+        document.querySelectorAll('.btn-script').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const scriptCode = this.getAttribute('data-script');
+            copyToClipboard(scriptCode);
+          });
+        });
+      }
+
+      // ============ COPY FUNCTION ============
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(() => {
+            showToast('✅ Script copied to clipboard!');
+          }).catch(() => {
+            fallbackCopy(text);
+          });
+        } else {
+          fallbackCopy(text);
+        }
+      }
+
+      function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('✅ Script copied to clipboard!');
+        } catch (err) {
+          showToast('❌ Failed to copy. Please copy manually.');
+        }
+        document.body.removeChild(textarea);
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      }
+
+      // ============ SEARCH ============
+      searchBar.addEventListener('input', function() {
+        renderScripts(this.value);
+      });
+
+      // ============ INIT ============
+      renderScripts();
+
+    })();
+  </script>
+
+</body>
+</html>
