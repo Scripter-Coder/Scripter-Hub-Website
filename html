@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>✧ Player Hub ✧</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0b0b0b;
+      /* animated background will be handled by the gradient + keyframes */
+    }
+
+    /* main card – glassmorphism + backdrop */
+    .portal {
+      position: relative;
+      width: 90%;
+      max-width: 820px;
+      padding: 2.8rem 2rem 3rem;
+      background: rgba(10, 10, 10, 0.25);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 3.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.03);
+      text-align: center;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      z-index: 2;
+    }
+
+    /* background animation – 3‑color shift (black → light gray → gray → black) */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: linear-gradient(145deg, #1a1a1a, #2b2b2b);
+      background-size: 400% 400%;
+      animation: colorPulse 14s ease-in-out infinite alternate;
+    }
+
+    @keyframes colorPulse {
+      0% {
+        background: #0a0a0a;        /* deep black */
+      }
+      30% {
+        background: #2e2e2e;        /* dark gray */
+      }
+      60% {
+        background: #b0b0b0;        /* light gray / white-ish */
+      }
+      85% {
+        background: #4a4a4a;        /* mid gray */
+      }
+      100% {
+        background: #0a0a0a;        /* back to black */
+      }
+    }
+
+    /* extra overlay to make text pop */
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* main title */
+    .glitch-title {
+      font-size: clamp(2.8rem, 12vw, 4.8rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #f0f0f0;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.3), 0 4px 20px rgba(0,0,0,0.8);
+      margin-bottom: 1.2rem;
+      word-break: break-word;
+      transition: 0.2s;
+    }
+    .glitch-title span {
+      background: linear-gradient(135deg, #f5f5f5, #bdbdbd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 800;
+    }
+
+    /* sub / decorative */
+    .sub-head {
+      color: rgba(220, 220, 220, 0.7);
+      font-size: 1rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: -0.6rem;
+      margin-bottom: 2.2rem;
+      font-weight: 300;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+
+    /* button grid */
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+
+    .btn {
+      flex: 0 1 auto;
+      min-width: 140px;
+      padding: 1rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      border: none;
+      border-radius: 60px;
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      color: #eaeaea;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transform: scale(1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* animated glow / interactive effect */
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .btn:hover {
+      transform: scale(1.04) translateY(-3px);
+      background: rgba(40, 40, 40, 0.7);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn:active {
+      transform: scale(0.94) translateY(2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.7);
+    }
+
+    /* special “soon” button – locked style */
+    .btn-locked {
+      background: rgba(30, 30, 30, 0.5);
+      color: #a0a0a0;
+      cursor: not-allowed;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-locked:hover {
+      transform: scale(1.02);
+      background: rgba(50, 50, 50, 0.5);
+      border-color: rgba(255, 215, 0, 0.2);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5);
+      color: #d4d4d4;
+    }
+
+    .btn-locked:active {
+      transform: scale(0.96);
+    }
+
+    /* small lock icon (emoji) */
+    .lock-icon {
+      display: inline-block;
+      margin-right: 6px;
+      opacity: 0.6;
+      filter: drop-shadow(0 0 4px rgba(255,215,0,0.2));
+    }
+
+    /* page placeholder (invisible until click) */
+    .page-indicator {
+      margin-top: 2.5rem;
+      padding: 0.8rem 1.2rem;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(2px);
+      border-radius: 60px;
+      display: inline-block;
+      color: #cecece;
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.05);
+      min-width: 180px;
+      transition: all 0.2s;
+    }
+
+    .page-indicator span {
+      color: #f0f0f0;
+      font-weight: 500;
+      background: rgba(255,255,255,0.04);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      margin-left: 4px;
+    }
+
+    .hidden-page {
+      display: none;
+    }
+
+    .footer-note {
+      margin-top: 1.5rem;
+      font-size: 0.7rem;
+      opacity: 0.25;
+      letter-spacing: 1px;
+      color: #ccc;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .portal {
+        padding: 2rem 1.2rem;
+        border-radius: 2.5rem;
+      }
+      .btn {
+        min-width: 120px;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated background (color cycling) -->
+  <div class="animated-bg"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- main card -->
+  <div class="portal">
+
+    <!-- big text -->
+    <h1 class="glitch-title">
+      <span>Hello Player,</span><br>
+      What U Looking For?
+    </h1>
+    <div class="sub-head">✦ interface v1.0 ✦</div>
+
+    <!-- button group -->
+    <div class="button-grid">
+
+      <!-- Button 1: Scripts/Executors Status -->
+      <button class="btn" data-page="status">📊 Scripts/Executors Status</button>
+
+      <!-- Button 2: Scripts -->
+      <button class="btn" data-page="scripts">📜 Scripts</button>
+
+      <!-- Button 3: Executors (Soon) – locked -->
+      <button class="btn btn-locked" data-page="soon" disabled>
+        <span class="lock-icon">🔒</span> Executors (Soon)
+      </button>
+
+      <!-- Button 4: Wiki -->
+      <button class="btn" data-page="wiki">📖 Wiki</button>
+
+    </div>
+
+    <!-- dynamic page display (will change on click) -->
+    <div id="pageDisplay" class="page-indicator">
+      ⚡ current: <span id="pageName">home</span>
+    </div>
+
+    <div class="footer-note">— interactive · animated —</div>
+  </div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      // get elements
+      const pageNameSpan = document.getElementById('pageName');
+      const buttons = document.querySelectorAll('.btn:not(.btn-locked)'); // all clickable (exclude locked)
+      const lockedBtn = document.querySelector('.btn-locked');
+      const displayDiv = document.getElementById('pageDisplay');
+
+      // mapping for page names (display)
+      const pageMap = {
+        'status': '📊 Scripts/Executors Status',
+        'scripts': '📜 Scripts',
+        'wiki': '📖 Wiki',
+        'soon': '🔒 Executors (Soon) — locked',
+        'home': '🏠 main hub'
+      };
+
+      // default page
+      let currentPage = 'home';
+      pageNameSpan.textContent = pageMap['home'];
+
+      // handle button clicks (only for non-locked)
+      buttons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const pageKey = this.getAttribute('data-page');
+          if (!pageKey) return;
+
+          // update display
+          currentPage = pageKey;
+          const displayName = pageMap[pageKey] || pageKey;
+          pageNameSpan.textContent = displayName;
+
+          // animate feedback (quick pulse)
+          displayDiv.style.transition = '0.08s';
+          displayDiv.style.transform = 'scale(0.96)';
+          displayDiv.style.background = 'rgba(60,60,60,0.5)';
+          setTimeout(() => {
+            displayDiv.style.transform = 'scale(1)';
+            displayDiv.style.background = 'rgba(0,0,0,0.4)';
+          }, 100);
+
+          // (optional) extra console log for part 2 readiness
+          console.log(`[navigation] → ${pageKey} (${displayName})`);
+
+          // You can uncomment below to simulate page change (for part 2)
+          // window.location.hash = pageKey; 
+        });
+      });
+
+      // locked button – show message (optional) 
+      if (lockedBtn) {
+        lockedBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          // show a subtle "locked" feedback
+          pageNameSpan.textContent = '🔒 Executors (Soon) — coming later';
+          displayDiv.style.transition = '0.1s';
+          displayDiv.style.background = 'rgba(80,60,20,0.3)';
+          setTimeout(() => {
+            displayDiv.style.background = 'rgba(0,0,0,0.4)';
+          }, 200);
+          // also show in console
+          console.log('[locked] Executors not yet available (part 2)');
+        });
+      }
+
+      // optional: if any link/hash is present, could handle, but we keep it simple
+
+      // extra: simulate that the buttons lead to "different pages" 
+      // we show the page name; later part 2 will replace with actual routing / content.
+      console.log('✅ Player Hub loaded. Part 1 ready. (Part 2: pages will be expanded)');
+
+    })();
+  </script>
+
+</body>
+</html>
