@@ -117,4 +117,3 @@ Button	What it does
 📋 Script	Copies script to clipboard
 ▶️ YouTube	Opens YouTube
 💬 Discord	Opens Discord
-
