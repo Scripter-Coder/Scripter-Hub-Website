@@ -18,10 +18,39 @@
       justify-content: center;
       align-items: center;
       background: #0b0b0b;
-      /* animated background will be handled by the gradient + keyframes */
     }
 
-    /* main card – glassmorphism + backdrop */
+    /* FIXED: smoother, continuous background animation */
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: #0a0a0a;
+      animation: colorPulse 12s ease-in-out infinite;
+    }
+
+    @keyframes colorPulse {
+      0% { background: #0a0a0a; }
+      20% { background: #2e2e2e; }
+      45% { background: #b0b0b0; }
+      70% { background: #4a4a4a; }
+      100% { background: #0a0a0a; }
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .portal {
       position: relative;
       width: 90%;
@@ -38,52 +67,9 @@
       z-index: 2;
     }
 
-    /* background animation – 3‑color shift (black → light gray → gray → black) */
-    .animated-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      background: linear-gradient(145deg, #1a1a1a, #2b2b2b);
-      background-size: 400% 400%;
-      animation: colorPulse 14s ease-in-out infinite alternate;
-    }
-
-    @keyframes colorPulse {
-      0% {
-        background: #0a0a0a;        /* deep black */
-      }
-      30% {
-        background: #2e2e2e;        /* dark gray */
-      }
-      60% {
-        background: #b0b0b0;        /* light gray / white-ish */
-      }
-      85% {
-        background: #4a4a4a;        /* mid gray */
-      }
-      100% {
-        background: #0a0a0a;        /* back to black */
-      }
-    }
-
-    /* extra overlay to make text pop */
-    .bg-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 30% 40%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* main title */
+    /* FIXED: Smaller title text */
     .glitch-title {
-      font-size: clamp(2.8rem, 12vw, 4.8rem);
+      font-size: clamp(2rem, 6.7vw, 3rem);
       font-weight: 700;
       letter-spacing: 0.02em;
       color: #f0f0f0;
@@ -91,6 +77,7 @@
       margin-bottom: 1.2rem;
       word-break: break-word;
       transition: 0.2s;
+      line-height: 1.2;
     }
     .glitch-title span {
       background: linear-gradient(135deg, #f5f5f5, #bdbdbd);
@@ -100,7 +87,6 @@
       font-weight: 800;
     }
 
-    /* sub / decorative */
     .sub-head {
       color: rgba(220, 220, 220, 0.7);
       font-size: 1rem;
@@ -114,7 +100,6 @@
       padding-bottom: 6px;
     }
 
-    /* button grid */
     .button-grid {
       display: flex;
       flex-wrap: wrap;
@@ -144,9 +129,10 @@
       transform: scale(1);
       position: relative;
       overflow: hidden;
+      text-decoration: none;
+      display: inline-block;
     }
 
-    /* animated glow / interactive effect */
     .btn::after {
       content: '';
       position: absolute;
@@ -177,7 +163,7 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.7);
     }
 
-    /* special “soon” button – locked style */
+    /* Locked button style */
     .btn-locked {
       background: rgba(30, 30, 30, 0.5);
       color: #a0a0a0;
@@ -200,7 +186,6 @@
       transform: scale(0.96);
     }
 
-    /* small lock icon (emoji) */
     .lock-icon {
       display: inline-block;
       margin-right: 6px;
@@ -208,7 +193,6 @@
       filter: drop-shadow(0 0 4px rgba(255,215,0,0.2));
     }
 
-    /* page placeholder (invisible until click) */
     .page-indicator {
       margin-top: 2.5rem;
       padding: 0.8rem 1.2rem;
@@ -232,10 +216,6 @@
       margin-left: 4px;
     }
 
-    .hidden-page {
-      display: none;
-    }
-
     .footer-note {
       margin-top: 1.5rem;
       font-size: 0.7rem;
@@ -244,7 +224,6 @@
       color: #ccc;
     }
 
-    /* responsive */
     @media (max-width: 600px) {
       .portal {
         padding: 2rem 1.2rem;
@@ -255,45 +234,45 @@
         padding: 0.8rem 1.2rem;
         font-size: 0.95rem;
       }
+      .glitch-title {
+        font-size: clamp(1.8rem, 6vw, 2.8rem);
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated background (color cycling) -->
   <div class="animated-bg"></div>
   <div class="bg-overlay"></div>
 
-  <!-- main card -->
   <div class="portal">
 
-    <!-- big text -->
+    <!-- FIXED: Text now says "What Are You Looking For?" on one line -->
     <h1 class="glitch-title">
-      <span>Hello Player,</span><br>
-      What Are You Looking For?
+      <span>Hello Player,<br>What Are You Looking For?</span>
     </h1>
     <div class="sub-head">✦ interface v1.0 ✦</div>
 
-    <!-- button group -->
     <div class="button-grid">
 
-      <!-- Button 1: Scripts/Executors Status -->
-      <a href="status.html" class="btn" style="text-decoration:none; display:inline-block;">📊 Scripts/Executors Status</a>
+      <!-- Scripts/Executors Status -->
+      <a href="status.html" class="btn">📊 Scripts/Executors Status</a>
 
-      <!-- Button 2: Scripts -->
-      <a href="scripts.html" class="btn" style="text-decoration:none; display:inline-block;">📜 Scripts</a>
+      <!-- Scripts -->
+      <a href="scripts.html" class="btn">📜 Scripts</a>
 
-      <!-- Button 3: Executors (Soon) – locked -->
-      <button class="btn btn-locked" data-page="soon" disabled>
+      <!-- Executors (Soon) - locked -->
+      <button class="btn btn-locked" disabled>
         <span class="lock-icon">🔒</span> Executors (Soon)
       </button>
 
-      <!-- Button 4: Wiki -->
-      <button class="btn" data-page="wiki">📖 Wiki</button>
+      <!-- Wiki (Soon) - NOW LOCKED & RENAMED -->
+      <button class="btn btn-locked" disabled>
+        <span class="lock-icon">🔒</span> Wiki (Soon)
+      </button>
 
     </div>
 
-    <!-- dynamic page display (will change on click) -->
     <div id="pageDisplay" class="page-indicator">
       ⚡ current: <span id="pageName">home</span>
     </div>
@@ -305,37 +284,29 @@
     (function() {
       "use strict";
 
-      // get elements
       const pageNameSpan = document.getElementById('pageName');
-      const buttons = document.querySelectorAll('.btn:not(.btn-locked)'); // all clickable (exclude locked)
-      const lockedBtn = document.querySelector('.btn-locked');
       const displayDiv = document.getElementById('pageDisplay');
 
-      // mapping for page names (display)
       const pageMap = {
         'status': '📊 Scripts/Executors Status',
         'scripts': '📜 Scripts',
-        'wiki': '📖 Wiki',
         'soon': '🔒 Executors (Soon) — locked',
+        'wiki': '🔒 Wiki (Soon) — locked',
         'home': '🏠 main hub'
       };
 
-      // default page
-      let currentPage = 'home';
       pageNameSpan.textContent = pageMap['home'];
 
-      // handle button clicks (only for non-locked)
-      buttons.forEach(btn => {
+      // Handle clicks on links (status, scripts)
+      document.querySelectorAll('a.btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
-          const pageKey = this.getAttribute('data-page');
-          if (!pageKey) return;
-
-          // update display
-          currentPage = pageKey;
-          const displayName = pageMap[pageKey] || pageKey;
-          pageNameSpan.textContent = displayName;
-
-          // animate feedback (quick pulse)
+          const text = this.textContent.trim();
+          let pageKey = 'home';
+          if (text.includes('Status')) pageKey = 'status';
+          else if (text.includes('Scripts')) pageKey = 'scripts';
+          
+          pageNameSpan.textContent = pageMap[pageKey] || pageKey;
+          
           displayDiv.style.transition = '0.08s';
           displayDiv.style.transform = 'scale(0.96)';
           displayDiv.style.background = 'rgba(60,60,60,0.5)';
@@ -343,37 +314,29 @@
             displayDiv.style.transform = 'scale(1)';
             displayDiv.style.background = 'rgba(0,0,0,0.4)';
           }, 100);
-
-          // (optional) extra console log for part 2 readiness
-          console.log(`[navigation] → ${pageKey} (${displayName})`);
-
-          // You can uncomment below to simulate page change (for part 2)
-          // window.location.hash = pageKey; 
         });
       });
 
-      // locked button – show message (optional) 
-      if (lockedBtn) {
-        lockedBtn.addEventListener('click', function(e) {
+      // Handle locked buttons
+      document.querySelectorAll('.btn-locked').forEach(btn => {
+        btn.addEventListener('click', function(e) {
           e.preventDefault();
-          // show a subtle "locked" feedback
-          pageNameSpan.textContent = '🔒 Executors (Soon) — coming later';
+          const text = this.textContent.trim();
+          let msg = '🔒 ';
+          if (text.includes('Executors')) msg += 'Executors (Soon) — coming later';
+          else if (text.includes('Wiki')) msg += 'Wiki (Soon) — coming later';
+          
+          pageNameSpan.textContent = msg;
           displayDiv.style.transition = '0.1s';
           displayDiv.style.background = 'rgba(80,60,20,0.3)';
           setTimeout(() => {
             displayDiv.style.background = 'rgba(0,0,0,0.4)';
           }, 200);
-          // also show in console
-          console.log('[locked] Executors not yet available (part 2)');
+          console.log('[locked] ' + text.trim());
         });
-      }
+      });
 
-      // optional: if any link/hash is present, could handle, but we keep it simple
-
-      // extra: simulate that the buttons lead to "different pages" 
-      // we show the page name; later part 2 will replace with actual routing / content.
-      console.log('✅ Player Hub loaded. Part 1 ready. (Part 2: pages will be expanded)');
-
+      console.log('✅ Player Hub loaded. All buttons updated.');
     })();
   </script>
 
