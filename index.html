@@ -224,6 +224,64 @@
       color: #ccc;
     }
 
+    /* --- NEW: Bottom-left corner buttons --- */
+    .corner-buttons {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 10;
+    }
+
+    .corner-btn {
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      backdrop-filter: blur(4px);
+      background: rgba(10, 10, 10, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .corner-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .corner-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Discord button - blue lines */
+    .btn-discord {
+      color: #8ab4f8;
+      border-color: rgba(88, 101, 242, 0.3);
+    }
+    .btn-discord:hover {
+      background: rgba(88, 101, 242, 0.15);
+      border-color: rgba(88, 101, 242, 0.5);
+      box-shadow: 0 0 20px rgba(88, 101, 242, 0.1);
+    }
+
+    /* YouTube button - red lines */
+    .btn-youtube {
+      color: #ff6b6b;
+      border-color: rgba(255, 50, 50, 0.3);
+    }
+    .btn-youtube:hover {
+      background: rgba(255, 50, 50, 0.15);
+      border-color: rgba(255, 50, 50, 0.5);
+      box-shadow: 0 0 20px rgba(255, 50, 50, 0.1);
+    }
+
     @media (max-width: 600px) {
       .portal {
         padding: 2rem 1.2rem;
@@ -236,6 +294,15 @@
       }
       .glitch-title {
         font-size: clamp(1.8rem, 6vw, 2.8rem);
+      }
+      .corner-buttons {
+        bottom: 12px;
+        left: 12px;
+        gap: 6px;
+      }
+      .corner-btn {
+        padding: 6px 12px;
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -266,7 +333,7 @@
         <span class="lock-icon">🔒</span> Executors (Soon)
       </button>
 
-      <!-- Other Executors (Soon) - NEW LOCKED BUTTON -->
+      <!-- Other Executors (Soon) - locked -->
       <button class="btn btn-locked" disabled>
         <span class="lock-icon">🔒</span> Other Executors (Soon)
       </button>
@@ -283,6 +350,16 @@
     </div>
 
     <div class="footer-note">— interactive · animated —</div>
+  </div>
+
+  <!-- NEW: Bottom-left corner buttons -->
+  <div class="corner-buttons">
+    <a href="https://discord.gg/v5swRqZzBG" target="_blank" class="corner-btn btn-discord">
+      💬 Discord Server
+    </a>
+    <a href="https://www.youtube.com/@Scripter-Coder" target="_blank" class="corner-btn btn-youtube">
+      ▶️ YouTube Channel
+    </a>
   </div>
 
   <script>
@@ -310,9 +387,9 @@
           let pageKey = 'home';
           if (text.includes('Status')) pageKey = 'status';
           else if (text.includes('Scripts')) pageKey = 'scripts';
-          
+
           pageNameSpan.textContent = pageMap[pageKey] || pageKey;
-          
+
           displayDiv.style.transition = '0.08s';
           displayDiv.style.transform = 'scale(0.96)';
           displayDiv.style.background = 'rgba(60,60,60,0.5)';
@@ -332,7 +409,7 @@
           if (text.includes('Executors')) msg += 'Executors (Soon) — coming later';
           else if (text.includes('Other Executors')) msg += 'Other Executors (Soon) — coming later';
           else if (text.includes('Wiki')) msg += 'Wiki (Soon) — coming later';
-          
+
           pageNameSpan.textContent = msg;
           displayDiv.style.transition = '0.1s';
           displayDiv.style.background = 'rgba(80,60,20,0.3)';
