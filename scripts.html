@@ -100,7 +100,6 @@
       letter-spacing: 2px;
     }
 
-    /* Search Bar */
     .search-container {
       max-width: 500px;
       margin: 1.5rem auto 2rem;
@@ -126,7 +125,6 @@
       color: #666;
     }
 
-    /* Script Grid */
     .scripts-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -157,7 +155,6 @@
       display: none;
     }
 
-    /* Image placeholder */
     .script-image {
       width: 100%;
       height: 160px;
@@ -194,7 +191,6 @@
       font-weight: 300;
     }
 
-    /* Button row */
     .button-row {
       display: flex;
       gap: 0.5rem;
@@ -244,7 +240,6 @@
     .btn-discord { background: rgba(88, 101, 242, 0.15); color: #7a8cff; border-color: rgba(88,101,242,0.1); }
     .btn-discord:hover { background: rgba(88, 101, 242, 0.25); }
 
-    /* Toast notification for copy */
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -323,7 +318,6 @@
 
   </div>
 
-  <!-- Toast notification -->
   <div class="toast" id="toast">✅ Script copied to clipboard!</div>
 
   <script>
@@ -331,15 +325,15 @@
       "use strict";
 
       // ============ SCRIPT DATA ============
-      // Add your scripts here following this format:
       const scriptsData = [
         {
           name: "Slap Battles",
           gameId: "6403373529",
-          image: "Images/SlapBattles.png",  // you'll upload this image
+          image: "Images/SlapBattles.png",
           gameUrl: "https://www.roblox.com/games/6403373529/Slap-Battles",
           script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/refs/heads/main/Slap%20Battles/SB%20Hub%20OP%20Script%20(GUI%20CHOOSER)"))()`,
-          youtube: "https://youtube.com/@yourchannel",
+          youtube: "",  // Empty = no YouTube button
+          discord: "",  // Empty = no Discord button
           status: "Working | OP ⭐"
         },
         {
@@ -408,7 +402,7 @@
           image: "Images/Evade.png",
           gameUrl: "https://www.roblox.com/games/7825533204/EVADE",
           script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Evade/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
+          youtube: "",  // No YouTube
           discord: "https://discord.gg/yourinvite",
           status: "Working (EXPERIMENTAL)"
         }
@@ -431,11 +425,29 @@
                         script.gameId.includes(query);
           
           if (!match && query !== '') {
-            // hidden - we'll add hidden class
             html += `<div class="script-card hidden" data-index="${index}">`;
           } else {
             visibleCount++;
             html += `<div class="script-card" data-index="${index}">`;
+          }
+
+          // Build button row - only show buttons if they have content
+          let buttonsHtml = '';
+
+          // Game button (always shows)
+          buttonsHtml += `<a href="${script.gameUrl}" target="_blank" class="action-btn btn-game">🎮 Game</a>`;
+
+          // Script button (always shows)
+          buttonsHtml += `<button class="action-btn btn-script" data-script="${script.script.replace(/"/g, '&quot;')}">📋 Script</button>`;
+
+          // YouTube button (only if youtube exists and is not empty)
+          if (script.youtube && script.youtube.trim() !== '') {
+            buttonsHtml += `<a href="${script.youtube}" target="_blank" class="action-btn btn-youtube">▶️ YouTube</a>`;
+          }
+
+          // Discord button (only if discord exists and is not empty)
+          if (script.discord && script.discord.trim() !== '') {
+            buttonsHtml += `<a href="${script.discord}" target="_blank" class="action-btn btn-discord">💬 Discord</a>`;
           }
 
           html += `
@@ -446,24 +458,19 @@
             <div class="script-gameid">ID: ${script.gameId}</div>
             <span class="status-badge">${script.status}</span>
             <div class="button-row">
-              <a href="${script.gameUrl}" target="_blank" class="action-btn btn-game">🎮 Game</a>
-              <button class="action-btn btn-script" data-script="${script.script.replace(/"/g, '&quot;')}">📋 Script</button>
-              <a href="${script.youtube}" target="_blank" class="action-btn btn-youtube">▶️ YouTube</a>
-              <a href="${script.discord}" target="_blank" class="action-btn btn-discord">💬 Discord</a>
+              ${buttonsHtml}
             </div>
           </div>`;
         });
 
         grid.innerHTML = html;
 
-        // Show/hide no results
         if (visibleCount === 0 && query !== '') {
           noResults.classList.add('visible');
         } else {
           noResults.classList.remove('visible');
         }
 
-        // Attach copy events to script buttons
         document.querySelectorAll('.btn-script').forEach(btn => {
           btn.addEventListener('click', function(e) {
             e.stopPropagation();
