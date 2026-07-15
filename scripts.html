@@ -325,88 +325,308 @@
       "use strict";
 
       // ============ SCRIPT DATA ============
-      const scriptsData = [
-        {
-          name: "Slap Battles",
-          gameId: "6403373529",
-          image: "Images/SlapBattles.png",
-          gameUrl: "https://www.roblox.com/games/6403373529/Slap-Battles",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/refs/heads/main/Slap%20Battles/SB%20Hub%20OP%20Script%20(GUI%20CHOOSER)"))()`,
-          youtube: "",  // Empty = no YouTube button
-          discord: "",  // Empty = no Discord button
-          status: ""
-        },
-        {
-          name: "Blade Ball",
-          gameId: "13772394625",
-          image: "Images/BladeBall.png",
-          gameUrl: "https://www.roblox.com/games/13772394625/Blade-Ball",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Blade%20Ball/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
-          discord: "https://discord.gg/yourinvite",
-          status: "Discontinued"
-        },
-        {
-          name: "Doors",
-          gameId: "6516141723",
-          image: "Images/Doors.png",
-          gameUrl: "https://www.roblox.com/games/6516141723/DOORS",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Doors/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
-          discord: "https://discord.gg/yourinvite",
-          status: "Working | OP ⭐"
-        },
-        {
-          name: "Ability Wars",
-          gameId: "5591681512",
-          image: "Images/AbilityWars.png",
-          gameUrl: "https://www.roblox.com/games/5591681512/Ability-Wars",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Ability%20Wars/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
-          discord: "https://discord.gg/yourinvite",
-          status: "Working | OP ⭐"
-        },
-        {
-          name: "Jailbreak",
-          gameId: "606849621",
-          image: "Images/Jailbreak.png",
-          gameUrl: "https://www.roblox.com/games/606849621/Jailbreak",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Jailbreak/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
-          discord: "https://discord.gg/yourinvite",
-          status: "Soon"
-        },
-        {
-          name: "Murder Mystery 2",
-          gameId: "142823291",
-          image: "Images/MM2.png",
-          gameUrl: "https://www.roblox.com/games/142823291/Murder-Mystery-2",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/MM2/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
-          discord: "https://discord.gg/yourinvite",
-          status: "Discontinued"
-        },
-        {
-          name: "Tower Defense Simulator X",
-          gameId: "4829014002",
-          image: "Images/TDSX.png",
-          gameUrl: "https://www.roblox.com/games/4829014002/Tower-Defense-Simulator-X",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/TDSX/script.lua"))()`,
-          youtube: "https://youtube.com/@yourchannel",
-          discord: "https://discord.gg/yourinvite",
-          status: "Soon"
-        },
-        {
-          name: "Evade",
-          gameId: "7825533204",
-          image: "Images/Evade.png",
-          gameUrl: "https://www.roblox.com/games/7825533204/EVADE",
-          script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Evade/script.lua"))()`,
-          youtube: "",  // No YouTube
-          discord: "https://discord.gg/yourinvite",
-          status: "Working (EXPERIMENTAL)"
-        }
-      ];
+const scriptsData = [
+  {
+    name: "99 Nights In The Forest",
+    gameId: "99 Nights In The Forest",
+    image: "Images/99NightsInTheForest.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/99-Nights-In-The-Forest",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/99%20Days%20In%20The%20Forest/99%20Nights%20In%20The%20Forest%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working | OP ⭐"
+  },
+  {
+    name: "Ability Wars",
+    gameId: "Ability Wars",
+    image: "Images/AbilityWars.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Ability-Wars",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Ability%20Wars/Ability%20Wars%20Hub%20OP"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working | OP ⭐"
+  },
+  {
+    name: "Blade Ball",
+    gameId: "Blade Ball",
+    image: "Images/BladeBall.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Blade-Ball",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Blade%20Ball/Blade%20Ball%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Discontinued"
+  },
+  {
+    name: "Clone Kingdom Tycoon",
+    gameId: "Clone Kingdom Tycoon",
+    image: "Images/CloneKingdomTycoon.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Clone-Kingdom-Tycoon",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Clone%20Kingdom%20Tycoon/Clone%20Kingdom%20Tycoon%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working (EXPERIMENTAL)"
+  },
+  {
+    name: "Die Of Death",
+    gameId: "Die Of Death",
+    image: "Images/DieOfDeath.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Die-Of-Death",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Die%20Of%20Death/Die%20Of%20Death%20Hub"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working (EXPERIMENTAL)"
+  },
+  {
+    name: "Doors",
+    gameId: "Doors",
+    image: "Images/Doors.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Doors",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Doors/Doors%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working | OP ⭐"
+  },
+  {
+    name: "Evade",
+    gameId: "Evade",
+    image: "Images/Evade.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Evade",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Evade/Evade%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working (EXPERIMENTAL)"
+  },
+  {
+    name: "Forsaken",
+    gameId: "Forsaken",
+    image: "Images/Forsaken.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Forsaken",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Forsaken/Forsaken%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working (EXPERIMENTAL)"
+  },
+  {
+    name: "Funky Friday",
+    gameId: "Funky Friday",
+    image: "Images/FunkyFriday.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Funky-Friday",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Funky%20Friday/Funky%20Friday%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Updating"
+  },
+  {
+    name: "Hades RNG",
+    gameId: "Hades RNG",
+    image: "Images/HadesRNG.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Hades-RNG",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Hades%20RNG/Hades%20RNG%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Discontinued"
+  },
+  {
+    name: "Jailbreak",
+    gameId: "Jailbreak",
+    image: "Images/Jailbreak.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Jailbreak",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Jailbreak/Jailbreak%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Murder Mystery 2",
+    gameId: "Murder Mystery 2",
+    image: "Images/MurderMystery2.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Murder-Mystery-2",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Murder%20Mystery%202/Murder%20Mystery%202%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Discontinued"
+  },
+  {
+    name: "Natural Disaster Survival",
+    gameId: "Natural Disaster Survival",
+    image: "Images/NaturalDisasterSurvival.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Natural-Disaster-Survival",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Natural%20Disaster%20Survival/Natural%20Disaster%20Survival%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Plants VS Brainrots",
+    gameId: "Plants VS Brainrots",
+    image: "Images/PlantsVSBrainrots.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Plants-VS-Brainrots",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Plants%20VS%20Brainrots/Plants%20VS%20Brainrots%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Not Working"
+  },
+  {
+    name: "Secret Universe",
+    gameId: "Secret Universe",
+    image: "Images/SecretUniverse.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Secret-Universe",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Secret%20Universe/Secret%20Universe%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Shoot And Eat Noobs",
+    gameId: "Shoot And Eat Noobs",
+    image: "Images/ShootAndEatNoobs.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Shoot-And-Eat-Noobs",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Shoot%20And%20Eat%20Noobs/Shoot%20Noobs%20And%20Eat%20Foods%20Hub%20Script%20(Fluent%20Version)"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working | OP ⭐"
+  },
+  {
+    name: "Sky Fighters",
+    gameId: "Sky Fighters",
+    image: "Images/SkyFighters.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Sky-Fighters",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Sky%20Fighters/Sky%20Fighters%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Slap Battles",
+    gameId: "Slap Battles",
+    image: "Images/SlapBattles.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Slap-Battles",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Slap%20Battles/SB%20Hub%20OP%20Script%20(GUI%20CHOOSER)"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working | OP ⭐"
+  },
+  {
+    name: "Slap Battles MODDED",
+    gameId: "Slap Battles MODDED",
+    image: "Images/SlapBattlesMODDED.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Slap-Battles-MODDED",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Slap%20Battles%20MODDED/Slap%20Battles%20MODDED%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Sols RNG",
+    gameId: "Sols RNG",
+    image: "Images/SolsRNG.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Sols-RNG",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Sols%20RNG/Sols%20RNG%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Discontinued"
+  },
+  {
+    name: "Something Evil Will Happen",
+    gameId: "Something Evil Will Happen",
+    image: "Images/SomethingEvilWillHappen.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Something-Evil-Will-Happen",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Something%20Evil%20Will%20Happen/Something%20Evil%20Will%20Happen%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Steal A Brainrot",
+    gameId: "Steal A Brainrot",
+    image: "Images/StealABrainrot.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Steal-A-Brainrot",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Steal%20A%20Brainrot/Steal%20A%20Brainrot%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Discontinued"
+  },
+  {
+    name: "Survive Lava For Brainrots",
+    gameId: "Survive Lava For Brainrots",
+    image: "Images/SurviveLavaForBrainrots.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Survive-Lava-For-Brainrots",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Survive%20Lava%20For%20Brainrots/Survive%20Lava%20For%20Brainrots%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Survive On A Raft",
+    gameId: "Survive On A Raft",
+    image: "Images/SurviveOnARaft.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Survive-On-A-Raft",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Survive%20On%20A%20Raft/Survive%20On%20A%20Raft%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Tenna 3D Blast: Spamton's Island",
+    gameId: "Tenna 3D Blast: Spamton's Island",
+    image: "Images/Tenna3DBlast.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Tenna-3D-Blast",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Tenna%203D%20Blast%20Spamtons%20Island/Tenna%203D%20Blast%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Tower Defense Simulator X",
+    gameId: "Tower Defense Simulator X",
+    image: "Images/TowerDefenseSimulatorX.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Tower-Defense-Simulator-X",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Tower%20Defense%20Simulator%20X/Tower%20Defense%20Simulator%20X%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Trollge Universal Incident",
+    gameId: "Trollge Universal Incident",
+    image: "Images/TrollgeUniversalIncident.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Trollge-Universal-Incident",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Trollge%20Universal%20Incident/Trollge%20Universal%20Incident%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working (EXPERIMENTAL)"
+  },
+  {
+    name: "Trollge Universe: Aftermath",
+    gameId: "Trollge Universe: Aftermath",
+    image: "Images/TrollgeUniverseAftermath.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Trollge-Universe-Aftermath",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Trollge%20Universe%20Aftermath/Trollge%20Universe%20Aftermath%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Soon"
+  },
+  {
+    name: "Universal Script Hub",
+    gameId: "Universal Script Hub",
+    image: "Images/UniversalScriptHub.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Universal-Script-Hub",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Universal/Whitelist_Users"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working"
+  },
+  {
+    name: "Violence District",
+    gameId: "Violence District",
+    image: "Images/ViolenceDistrict.png",
+    gameUrl: "https://www.roblox.com/games/placeholder/Violence-District",
+    script: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Scripter-Coder/Scripter-Coder/main/Violence%20District/Violence%20District%20Hub%20Script"))()`,
+    youtube: "",
+    discord: "",
+    status: "Working (EXPERIMENTAL)"
+  }
+];
 
       // ============ RENDER ============
       const grid = document.getElementById('scriptsGrid');
