@@ -266,7 +266,12 @@
         <span class="lock-icon">🔒</span> Executors (Soon)
       </button>
 
-      <!-- Wiki (Soon) - NOW LOCKED & RENAMED -->
+      <!-- Other Executors (Soon) - NEW LOCKED BUTTON -->
+      <button class="btn btn-locked" disabled>
+        <span class="lock-icon">🔒</span> Other Executors (Soon)
+      </button>
+
+      <!-- Wiki (Soon) - LOCKED & RENAMED -->
       <button class="btn btn-locked" disabled>
         <span class="lock-icon">🔒</span> Wiki (Soon)
       </button>
@@ -290,7 +295,8 @@
       const pageMap = {
         'status': '📊 Scripts/Executors Status',
         'scripts': '📜 Scripts',
-        'soon': '🔒 Executors (Soon) — locked',
+        'executors': '🔒 Executors (Soon) — locked',
+        'other': '🔒 Other Executors (Soon) — locked',
         'wiki': '🔒 Wiki (Soon) — locked',
         'home': '🏠 main hub'
       };
@@ -324,6 +330,7 @@
           const text = this.textContent.trim();
           let msg = '🔒 ';
           if (text.includes('Executors')) msg += 'Executors (Soon) — coming later';
+          else if (text.includes('Other Executors')) msg += 'Other Executors (Soon) — coming later';
           else if (text.includes('Wiki')) msg += 'Wiki (Soon) — coming later';
           
           pageNameSpan.textContent = msg;
