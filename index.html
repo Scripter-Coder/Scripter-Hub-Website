@@ -328,6 +328,9 @@
       <!-- Scripts -->
       <a href="scripts.html" class="btn">📜 Scripts</a>
 
+      <!-- Obfuscator -->
+      <a href="https://scripter-coder.github.io/Scripter-s-Obfuscator/" target="_blank" class="btn">💎 Obfuscator</a>
+
       <!-- Executors (Soon) - locked -->
       <button class="btn btn-locked" disabled>
         <span class="lock-icon">🔒</span> Executors (Soon)
@@ -372,6 +375,7 @@
       const pageMap = {
         'status': '📊 Scripts/Executors Status',
         'scripts': '📜 Scripts',
+        'obfuscator': '💎 Obfuscator — external site',
         'executors': '🔒 Executors (Soon) — locked',
         'other': '🔒 Other Executors (Soon) — locked',
         'wiki': '🔒 Wiki (Soon) — locked',
@@ -386,6 +390,7 @@
           const text = this.textContent.trim();
           let pageKey = 'home';
           if (text.includes('Status')) pageKey = 'status';
+          else if (text.includes('Obfuscator')) pageKey = 'obfuscator';
           else if (text.includes('Scripts')) pageKey = 'scripts';
 
           pageNameSpan.textContent = pageMap[pageKey] || pageKey;
